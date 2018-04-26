@@ -5,5 +5,5 @@
 
 PROJECT_NAME := esp-laptimer
 
-include ./external/esp-idf/make/project.mk
+include ${IDF_PATH}/make/project.mk
 

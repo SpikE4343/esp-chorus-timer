@@ -1,3 +1,6 @@
+#ifndef _lap_timer_INCLUDED_
+#define _lap_timer_INCLUDED_
+
 
 #include "driver/gpio.h"
 
@@ -8,6 +11,8 @@
 
 #define MAX_RACE_PILOT_COUNT 8
 #define MAX_RACE_COUNT 64
+
+#define MAX_DEVICE_COUNT 10
 
 typedef enum
 {
@@ -53,7 +58,7 @@ typedef struct
 
     DeviceConfig_t device;
 
-    char name[MAX_NAME_LEN];
+    char name[MAX_PILOT_NAME_LEN];
     Lap_t laps[MAX_LAP_COUNT];
     
     
@@ -76,17 +81,22 @@ typedef struct
 
 typedef struct 
 {
-    uint16_t        minLapTime;
-    uint8_t         pilotCount;
-    uint8_t         raceCount;
-    uint8_t         deviceCount;
+    uint16_t  minLapTime;
+    uint8_t   pilotCount;
+    uint8_t   raceCount;
+    uint8_t   deviceCount;
 
-    Pilot_t         pilots[MAX_PILOT_COUNT];    
-    Race_t          races[MAX_RACE_COUNT];
-    Device_t        devices[MAX_DEVICE_COUNT];
+    Pilot_t   pilots[MAX_PILOT_COUNT];    
+    Race_t    races[MAX_RACE_COUNT];
+    Device_t  devices[MAX_DEVICE_COUNT];
 
 } LapTimer_t;
 
+typedef struct
+{
+  uint32_t updateDelayMs;  
+} LapTimerConfig_t;
 
-void lapTimerInit(LapTimerConfig_t* info);
-void lapTimerUpdatePilotConfig(PilotConfig_t* pilot);
+void lapTimerInit(LapTimerConfig_t* config);
+
+#endif
